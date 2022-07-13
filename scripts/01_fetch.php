@@ -80,7 +80,9 @@ $ff->setAttribute('value', '-1');
 $formInput = new \Symfony\Component\DomCrawler\Field\InputFormField($ff);
 $form->set($formInput);
 
+$yearPool = [];
 foreach ($projectYears as $projectYear) {
+    $yearPool[$projectYear] = [];
     $rawPath = $basePath . '/raw/' . $projectYear;
     if (!file_exists($rawPath)) {
         mkdir($rawPath, 0777, true);
@@ -90,6 +92,7 @@ foreach ($projectYears as $projectYear) {
         mkdir($dataPath, 0777, true);
     }
     foreach ($cities as $city) {
+        $yearPool[$projectYear][$city] = 0;
         $targetFile = $rawPath . '/' . $city . '.html';
         if (!file_exists($targetFile)) {
             $crawler = $client->submit($form, ['City' => $city, 'ProjectYear' => $projectYear]);
@@ -116,6 +119,13 @@ foreach ($projectYears as $projectYear) {
                         $parts3 = explode('：', $part);
                         $dataLine[$parts3[0]] = $parts3[1];
                     }
+                    if (!isset($dataLine['變異類型'])) {
+                        $dataLine['變異類型'] = '';
+                    }
+                    if ($dataLine['變異類型'] === '傾倒廢棄物、土') {
+                        $yearPool[$projectYear][$city] += 1;
+                    }
+
                     $dataLine['latitude'] = trim(substr($parts[0], strrpos($parts[0], '(') + 1));
                     $dataLine['longitude'] = trim($parts[1]);
                     if (false === $headerDone) {
@@ -127,4 +137,14 @@ foreach ($projectYears as $projectYear) {
             }
         }
     }
+}
+
+$headerDone = false;
+$fh = fopen($basePath . '/data/csv/summary.csv', 'w');
+foreach ($yearPool as $y => $line) {
+    if (false === $headerDone) {
+        $headerDone = true;
+        fputcsv($fh, array_merge(['year'], array_keys($line)));
+    }
+    fputcsv($fh, array_merge([$y], $line));
 }
