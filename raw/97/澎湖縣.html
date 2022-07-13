@@ -1,0 +1,615 @@
+
+
+<!DOCTYPE html>
+<html>
+<head><title>
+	國土利用監測整合資訊網
+</title><meta http-equiv="X-UA-Compatible" content="IE=10" /><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../JavaScript/jquery.min.js"></script>
+
+<!-- Bootstrap core CSS -->
+    
+<link href="../../../App_Themes/RWDTheme/bootstrap.min.css" rel="stylesheet" /><link href="../../../App_Themes/RWDTheme/nouislider.min.css" rel="stylesheet" /><link href="../../../App_Themes/RWDTheme/nouislider.pips.css" rel="stylesheet" />
+    
+<script src="../JavaScript/bootstrap.min.js"></script>
+    <!--[if IE 10]><link rel="stylesheet" href="../../../App_Themes/RWDTheme/styleIE10.css" type="text/css" media="screen, projection" /><![endif]-->
+    <link href="../JavaScript/googleapifontsRaleway.css" rel="stylesheet" />
+<!-- <link rel="stylesheet" type="text/css" href="../../../App_Themes/RWDTheme/fonts/font-awesome.min.css" /> -->
+<link rel="stylesheet" type="text/css" href="../../../App_Themes/RWDTheme/style.css" />
+
+
+
+<!--[if lt IE 9]>
+	<script src="../JavaScript/html5shiv.js"></script>
+    <script src="../JavaScript/Respond.js"></script>
+<![endif]-->
+
+</head>
+<body data-spy="scroll" data-target="#myScrollspy" data-offset="250" >    
+<header>
+<div class="container-fluid">
+
+    <!-- Title Bar -->
+	<div class="row">
+    	<div class="col-xs-12 no-padding header-top">
+            <div class="header-top-body">
+                <div class="lang btn-group">                    
+                    <a href="./" class="btn btn-default">回首頁</a>
+                    <div class="btn btn-default active">中文</div>
+                    <a class="btn btn-default" href="index_en.aspx">English</a>                    
+                </div>
+                <a href="./">
+                    <div class="title hidden-xs">國土利用監測整合資訊網</div>
+                    <div class="subtitle hidden-xs">Integrated Land Use Monitoring</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+	<!-- Header's image banner -->
+  <div class="row">
+  	<div class="col-xs-12 col-sm-5 no-padding headerimg height3" id="header_left" style="background-image: url('../../../App_Themes/RWDTheme/Image/header_left_0.jpg')">
+    </div>
+  
+  	<div class="hidden-xs col-sm-7 no-padding">
+        <div class="container-fluid">
+    	    <div class="row">
+                <div class="col-sm-12 no-padding headerimg height1" id="header_top" style="background-image: url('../../../App_Themes/RWDTheme/Image/header_top_0.jpg')">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-7 no-padding headerimg height2" id="header_bottoma" style="background-image: url('../../../App_Themes/RWDTheme/Image/header_bottoma_0.jpg')">
+                </div>
+                <div class="col-sm-5 no-padding headerimg height2" id="header_bottomb" style="background-image: url('../../../App_Themes/RWDTheme/Image/header_bottomb_0.jpg')">
+                </div>
+            </div>
+        </div>
+    </div>  
+</div>
+</div>
+</header>
+
+<!-- Begin Navbar -->
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom:0px">
+    <div class="container-fluid"> 
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> 
+        	<span class="sr-only">Toggle navigation</span> 
+        	<span class="icon-bar"></span> 
+        	<span class="icon-bar"></span> 
+        	<span class="icon-bar"></span> 
+        </button>
+        <a class="navbar-brand visible-xs" href="./">國土利用監測整合資訊網</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="pull-left hidden-xs hidden" id="navbar-brand-big"><a class="navbar-brand" href="./">國土利用監測整合資訊網</a></li> 
+          <li class=" "><a href="news.aspx">最新消息 <span class="sr-only">(current)</span></a></li>
+          <li class="dropdown ">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="proc.aspx">國土利用監測整合作業<span class="caret"></span></a>
+    		<ul class="dropdown-menu">
+                <li><a href="proc.aspx#proc1">計畫緣起及推動歷程</a></li><li><a href="proc.aspx#proc4">國土利用監測作業</a></li><li><a href="proc.aspx#proc8">通報查報流程</a></li><li><a href="proc.aspx#proc9">通報配合單位</a></li><li><a href="proc.aspx#proc10">加值應用成果</a></li>
+
+		    </ul>
+		  </li>
+          <li class="dropdown  active">
+    		<a class="dropdown-toggle" data-toggle="dropdown" href="#">公開資訊<span class="caret"></span></a>
+    		<ul class="dropdown-menu">
+      			<li class=" "><a href="pub_result.aspx">監測通報回報統計成果</a></li>
+      			<li class=" active"><a href="pub_exhibit.aspx">歷年衛星影像暨變異點展示</a></li>
+                <li class=" "><a href="Privacy.aspx">隱私權政策</a></li>
+		    </ul>
+		  </li>
+          <li class=" "><a href="download.aspx">檔案下載</a></li>
+          <li class=" "><a href="link.aspx">相關連結</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container-fluid" id="content">
+  
+<form method="post" action="./pub_exhibit.aspx" id="form1">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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" />
+
+<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="2E4128D1" />
+<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="EofK6OET+GhfMZn+Kf0IYIA99I7kCaYclxQ+wVXuX2r/qfzXgYBQSFzF6ugHhW0fpick4PWb7TmiQc14keojj8MJSUDYuanhkiQ4DNABeBXr+Pi1k+zS3dC/38qDkf1n" />
+
+        <script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyC2h3aMET4cx5GbcHcNRg1E7bvQEvEPmI0&sensor=false""></script>
+        <script>
+            var Cenx = 23.5;
+            var Ceny = 121.196132;
+            var iZoom = 7;
+
+            // TODO: update these variables from the server, to set the satellite image years!
+            var totalYears = 3;
+            var endYear = 105;
+            var ChgYear = -1;
+            var ChgCity = -1;
+            var ImgYear = -1;
+            var projectYears = ['104', '103'];
+            var citys = [];
+            var selectMapValues = 0;
+            var map;
+            var al = [];
+
+            function initialize() {
+                var mapOptions = {
+                    center: new google.maps.LatLng(Cenx, Ceny),
+                    zoom: iZoom,
+                    mapTypeControl: false,
+                    gestureHandling: 'greedy'
+                };
+
+                map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+                MapTypeControl(map);
+                ProjectYearControl(map);
+                CitysControl(map);
+                NLSCMap();
+                markImage();
+                markerBind();
+                overLoadeNLSCMap();
+                onImgLayerChange(ImgYear, 4);
+
+            }
+
+            function overLoadeNLSCMap() {
+                if (map.overlayMapTypes.getAt(1) != null) {
+                    map.overlayMapTypes.removeAt(1);
+                }
+
+                var options;
+                if (selectMapValues == 0) {
+                    options = parseInt($('#selectMap').val());
+                } else {
+                    options = selectMapValues;
+                }
+                selectMapValues = 0;
+                if (options == 1) {
+                    if (map.overlayMapTypes.getAt(0) != null) {
+                        map.overlayMapTypes.removeAt(0);
+                    }
+                    map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
+                } else if (options == 2) {
+                    if (map.overlayMapTypes.getAt(0) != null) {
+                        map.overlayMapTypes.removeAt(0);
+                    }
+                    map.setMapTypeId(google.maps.MapTypeId.SATELLITE);                
+                }else {
+                    NLSCMap();
+                }
+
+
+
+                if (options == 4)
+                    $("#hideShowYear").show();
+                else
+                    $("#hideShowYear").hide();
+
+                onImgLayerChange($("#PublicImg").val(), $('#selectMap').val());
+
+
+            }
+
+            function ProjectYearControl(map) {
+                var controlDiv = $('<div>變異點通報年度：</div>');
+                controlDiv.css('padding', '5px');
+
+                var controlYear = $('<select></select>');
+                controlYear.attr('id', 'ProjectYear');
+                controlYear.attr('name', 'ProjectYear');
+                controlYear.on('change', function () { onProjectSelectChange(); });
+
+                var isselected = false;
+                if (ChgYear == -1) {
+                    isselected = true;
+                } else {
+                    isselected = true;
+                }
+                controlYear.append($('<option>', {
+                    value: -1,
+                    text: '請選擇',
+                    selected: isselected
+                }));
+
+
+                for (var i = 0; i < projectYears.length; i++) {
+                    if (ChgYear == projectYears[i]) {
+                        isselected = true;
+                    } else {
+                        isselected = false;
+                    }
+                    controlYear.append($('<option>', {
+                        value: projectYears[i],
+                        text: (projectYears[i]).toString() + '年',
+                        selected: isselected
+                    }));
+                }
+
+                controlDiv.append(controlYear);
+
+                map.controls[google.maps.ControlPosition.TOP_LEFT].push(controlDiv.get(0));
+            }
+
+            function CitysControl(map) {
+                var controlDiv = $('<div>縣市：</div>');
+                controlDiv.css('padding', '5px');
+
+                var controlCity = $('<select></select>');
+                controlCity.attr('id', 'City');
+                controlCity.attr('name', 'City');
+                controlCity.on('change', function () { onProjectSelectChange(); });
+
+                var isselected = false;
+                if (ChgCity == -1) {
+                    isselected = true;
+                } else {
+                    isselected = true;
+                }
+                controlCity.append($('<option>', {
+                    value: -1,
+                    text: '請選擇',
+                    selected: isselected
+                }));
+
+
+                for (var i = 0; i < citys.length; i++) {
+                    if (ChgCity == citys[i]) {
+                        isselected = true;
+                    } else {
+                        isselected = false;
+                    }
+                    controlCity.append($('<option>', {
+                        value: citys[i],
+                        text: (citys[i]).toString(),
+                        selected: isselected
+                    }));
+                }
+
+                controlDiv.append(controlCity);
+
+                map.controls[google.maps.ControlPosition.TOP_LEFT].push(controlDiv.get(0));
+            }
+
+            function MapTypeControl(map) {
+                var controlDiv = $('<div></div>');
+                controlDiv.css('padding', '5px');
+
+                var controlUI = $('<select></select>');
+                controlUI.attr('id', 'selectMap');
+                controlUI.attr('name', 'selectMap');
+                controlUI.on('change', function () { overLoadeNLSCMap(); });
+
+                var option3check = false;
+                if (selectMapValues == 3) {
+                    option3check = true;
+                }
+
+                controlUI.append($('<option>', {
+                    value: 3,
+                    text: '國土測繪中心臺灣通用電子地圖',
+                    selected: option3check
+                }));
+
+                var option1check = false;
+                if (selectMapValues == 1) {
+                    option1check = true;
+                }
+                controlUI.append($('<option>', {
+                    value: 1,
+                    text: 'Google 電子地圖',
+                    selected: option1check
+                }));
+
+                
+                var isselected = false;
+                if (ImgYear != -1) {
+                    isselected = true;
+                }
+
+                controlUI.append($('<option>', {
+                    value: 4,
+                    text: '歷年衛星影像',
+                    selected: isselected
+                }));
+
+
+                var controlYear = $('<select></select>');
+                controlYear.attr('id', 'PublicImg');
+                controlYear.attr('name', 'PublicImg');
+                controlYear.on('change', function () { onSelectChange(); });
+
+                var isselected = false;
+                if (ImgYear == -1) {
+                    isselected = true;
+                } else {
+                    isselected = false;
+                }
+                controlYear.append($('<option>', {
+                    value: -1,
+                    text: '請選擇',
+                    selected: isselected
+                }));
+
+                for (var i = 0; i < totalYears; i++) {
+                    if (ImgYear == i) {
+                        isselected = true;
+                    } else {
+                        isselected = false;
+                    }
+                    controlYear.append($('<option>', {
+                        value: i,
+                        text: (endYear - i).toString() + '年',
+                        selected: isselected
+                    }));
+                }
+
+                var controlHideShowYear = $('<span></span>');
+                controlHideShowYear.attr('id', 'hideShowYear');
+                controlHideShowYear.append(controlYear);
+                if (ImgYear != -1) {
+                    controlHideShowYear.show();
+                } else {
+                    controlHideShowYear.hide();
+                }
+
+
+                controlDiv.append(controlUI);
+                controlDiv.append(controlHideShowYear);
+
+                map.controls[google.maps.ControlPosition.TOP_RIGHT].push(controlDiv.get(0));
+            }
+
+            function NLSCMap() {
+                var trafficOptions = {
+                    getTileUrl: function (coord, zoom) {
+                        //return 'http://maps.nlsc.gov.tw/S_Maps/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=EMAP&STYLE=_null&TILEMATRIXSET=EPSG:3857&TILEMATRIX=EPSG:3857:' + zoom + '&TILEROW=' + coord.y + '&TILECOL=' + coord.x + '&FORMAT=image/png';
+                        return 'http://wmts.nlsc.gov.tw/wmts/EMAP/default/GoogleMapsCompatible/' + zoom + '/' + coord.y + '/' + coord.x;
+                    },
+                    tileSize: new google.maps.Size(256, 256),
+                    isPng: true
+                };
+
+                map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
+                var trafficMapType = new google.maps.ImageMapType(trafficOptions);
+                map.overlayMapTypes.insertAt(0, trafficMapType);
+            }
+
+            function onImgLayerChange(Pindex, Sindex) {
+                var index = parseInt(Pindex);
+
+                var options = parseInt(Sindex);
+
+                if (index > -1 && options == 4) {
+                    var MapSource = al[index][1];
+                    var nst1 = al[index][0];
+
+                    var nstr1;
+
+                    if (MapSource == 'CSRSRWMTS') {
+                        nstr1 = nst1;
+                    } else {
+                        nstr1 = nst1.substring(0, nst1.lastIndexOf("/") + 1);
+                    }
+
+                    var trafficOptions;
+                    if (map.overlayMapTypes.getAt(1) != null) {
+                        map.overlayMapTypes.removeAt(1);
+                    }
+
+                    if (MapSource == 'CutMap') {
+                        trafficOptions = {
+                            getTileUrl: function (coord, zoom) {
+                                zoom1 = 17 - zoom;
+                                if (zoom1 >= -2 && zoom1 <= 10) {
+                                    alert(nstr1 + zoom1 + '/' + coord.x + '/IMG_' + coord.x + '_' + coord.y + '_' + zoom1 + '.png');
+                                    return nstr1 + zoom1 + '/' + coord.x + '/IMG_' + coord.x + '_' + coord.y + '_' + zoom1 + '.png';
+                                }
+                                else {
+                                    return '';
+                                }
+                            },
+
+                            tileSize: new google.maps.Size(256, 256),
+                            isPng: true
+                        };
+
+                        var trafficMapType = new google.maps.ImageMapType(trafficOptions);
+                        map.setMapTypeId('roadmap');
+                        map.overlayMapTypes.insertAt(1, trafficMapType);
+                    }
+
+                    if (MapSource == 'MapTile') {
+                        var mapBounds = new google.maps.LatLngBounds(
+                            new google.maps.LatLng(al[index][2], al[index][3]),
+                            new google.maps.LatLng(al[index][4], al[index][5]));
+
+                        var trafficOptions = {
+                            getTileUrl: function (coord, zoom) {
+                                var proj = map.getProjection();
+                                var z2 = Math.pow(2, zoom);
+                                var tileXSize = 256 / z2;
+                                var tileYSize = 256 / z2;
+                                var tileBounds = new google.maps.LatLngBounds(
+                                    proj.fromPointToLatLng(new google.maps.Point(coord.x * tileXSize, (coord.y + 1) * tileYSize)),
+                                    proj.fromPointToLatLng(new google.maps.Point((coord.x + 1) * tileXSize, coord.y * tileYSize))
+                                );
+
+                                var y = coord.y;
+                                return nstr1 + zoom + "/" + coord.x + "/" + y + ".png";
+                            },
+
+                            tileSize: new google.maps.Size(256, 256),
+                            isPng: true,
+                            opacity: 1.0
+                        };
+
+                        var trafficMapType = new google.maps.ImageMapType(trafficOptions);
+                        map.setMapTypeId('roadmap');
+                        map.overlayMapTypes.insertAt(1, trafficMapType);
+                    }
+
+                    if (MapSource == 'CSRSRWMTS') {
+                        var mapBounds = new google.maps.LatLngBounds(
+                            new google.maps.LatLng(al[index][2], al[index][3]),
+                            new google.maps.LatLng(al[index][4], al[index][5]));
+
+                        var trafficOptions = {
+                            getTileUrl: function (coord, zoom) {
+                                var proj = map.getProjection();
+                                var z2 = Math.pow(2, zoom);
+                                var tileXSize = 256 / z2;
+                                var tileYSize = 256 / z2;
+                                var tileBounds = new google.maps.LatLngBounds(
+                                    proj.fromPointToLatLng(new google.maps.Point(coord.x * tileXSize, (coord.y + 1) * tileYSize)),
+                                    proj.fromPointToLatLng(new google.maps.Point((coord.x + 1) * tileXSize, coord.y * tileYSize))
+                                );
+
+                                if (mapBounds.intersects(tileBounds)) {
+                                    return nstr1 + '3857/' + zoom + '/' + coord.x + '/' + coord.y + '.png';
+                                } else {
+                                    return '';
+                                }
+
+                            },
+
+                            tileSize: new google.maps.Size(256, 256),
+                            isPng: true
+                        };
+
+                        var trafficMapType = new google.maps.ImageMapType(trafficOptions);
+                        map.setMapTypeId('roadmap');
+                        map.overlayMapTypes.insertAt(1, trafficMapType);
+                    }
+                } else {
+                    if (map.overlayMapTypes.getAt(1) != null) {
+                        map.overlayMapTypes.removeAt(1);
+                    }
+                }
+            }
+
+            function onSelectChange() {
+                onImgLayerChange($("#PublicImg").val(), $('#selectMap').val());
+            }
+
+            function onProjectSelectChange() {
+                document.getElementById("h_lat").value = map.getCenter().lat();
+                document.getElementById("h_lng").value = map.getCenter().lng();
+                document.getElementById("h_zoom").value = map.getZoom();
+                var citysvalue = $("#City").val();
+                var projectYearValue = $("#ProjectYear").val();
+                if (citysvalue != '-1' && projectYearValue != '-1')
+                {
+                    __doPostBack("ctl00$page_content$ChgPointMarker", "");
+                }
+                
+                
+            }
+
+            function setMarkers(lat, lng, desc,icontype) {
+
+                var contentString = '<div id="Markcontent" style="background-color:white">' +
+                '<div id="siteNotice" style="background-color:white">' + desc + '</div></div>';
+
+                var infowindow = new google.maps.InfoWindow({
+                    content: contentString
+                });
+                var image;
+                var image = new google.maps.MarkerImage('../../../App_Themes/MainTheme/Image/' + icontype,
+                new google.maps.Size(30, 32),
+                new google.maps.Point(0, 0),
+                new google.maps.Point(0, 32));
+                var shadow = new google.maps.MarkerImage('http://www.google.com/mapfiles/shadow50.png',
+                new google.maps.Size(15, 17),
+                new google.maps.Point(0, 0),
+                new google.maps.Point(0, 32));
+                var shape = { coord: [1, 1, 1, 20, 18, 20, 18, 1], type: 'poly' };
+
+                var myLatLng = new google.maps.LatLng(lat, lng);
+
+                var marker = new google.maps.Marker({
+                    position: myLatLng,
+                    map: map,
+                    shadow: shadow,
+                    icon: image,
+                    shape: shape,
+                    zIndex: 10
+                });
+
+                google.maps.event.addListener(marker, 'click', function () {
+                    infowindow.open(map, marker);
+                });
+            }
+
+            google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+            <!-- Body -->
+            <input type="hidden" id="h_lat" name="h_lat" value="23.5" />
+            <input type="hidden" id="h_lng" name="h_lng" value="121.196132" />
+            <input type="hidden" id="h_zoom" name="h_zoom" value="7" />
+
+            <div class="row content-body">
+                <div class="col-xs-12">
+                    <div class="headcontainer">
+                    <h1>歷年衛星影像暨變異點展示平台</h1>
+                    </div>
+                    將97年起的變異點資訊空間化，讓各界了解變異點座落位置及查證結果等，並提供套疊歷年衛星影像功能，能切換不同年度的衛星影像，交叉比對觀察變異點變化。
+
+                </div>
+                
+                <div class="col-xs-12">
+                        <a id="page_content_ChgPointMarker" href="javascript:__doPostBack(&#39;ctl00$page_content$ChgPointMarker&#39;,&#39;&#39;)"></a>
+                	<div id="map_canvas" style="width:100%; height:600px"></div>
+					<div style="text-align: center;"><img src="../../../App_Themes/MainTheme/Image/chg_red.png" />為違規變異點圖示;<img src="../../../App_Themes/MainTheme/Image/chg.png" />為非違規變異點圖示，點擊圖示即可顯示該變異點的資訊。</div>                
+                </div>
+            </div>
+    <script type='text/javascript'>Cenx=23.042379299657025;Ceny=120.40802721756668;iZoom=11;ImgYear=-1;ChgYear=97;ChgCity='澎湖縣';selectMapValues=3;function markerBind(){setMarkers(23.59822, 119.65601,'變異點編號：X02970400002<br/>權責單位：澎湖縣<br/>查證結果：違規<br/>變異類型：其他','chg_red.png');setMarkers(23.57983, 119.60835,'變異點編號：X01970400004<br/>權責單位：澎湖縣<br/>查證結果：合法<br/>變異類型：新增建物','chg.png');setMarkers(23.57359, 119.60242,'變異點編號：X01970400005<br/>權責單位：澎湖縣<br/>查證結果：合法<br/>變異類型：道路變化','chg.png');setMarkers(23.37246, 119.49616,'變異點編號：X05970400001<br/>權責單位：澎湖縣<br/>查證結果：合法<br/>變異類型：河道變化','chg.png');setMarkers(23.36516, 119.52670,'變異點編號：X05971000001<br/>權責單位：澎湖縣<br/>查證結果：違規<br/>變異類型：新增建物','chg_red.png');setMarkers(23.55847, 119.57859,'變異點編號：X01970400006<br/>權責單位：澎湖縣<br/>查證結果：合法<br/>變異類型：新增建物','chg.png');setMarkers(23.74157, 119.61392,'變異點編號：X03971000003<br/>權責單位：澎湖縣<br/>查證結果：合法<br/>變異類型：自然植被改變','chg.png');setMarkers(23.61235, 119.61185,'變異點編號：X03971000004<br/>權責單位：澎湖縣<br/>查證結果：違規<br/>變異類型：自然植被改變','chg_red.png');setMarkers(23.57979, 119.56884,'變異點編號：X01970400003<br/>權責單位：澎湖縣<br/>查證結果：合法<br/>變異類型：其他','chg.png');setMarkers(23.52124, 119.60374,'變異點編號：X01971000006<br/>權責單位：澎湖縣<br/>查證結果：違規<br/>變異類型：新增建物','chg_red.png');setMarkers(23.59624, 119.60839,'變異點編號：X02971000005<br/>權責單位：澎湖縣<br/>查證結果：合法<br/>變異類型：整地','chg.png');setMarkers(23.36345, 119.52097,'變異點編號：X05971000002<br/>權責單位：澎湖縣<br/>查證結果：合法<br/>變異類型：其他','chg.png');setMarkers(23.51860, 119.59014,'變異點編號：X01971000007<br/>權責單位：澎湖縣<br/>查證結果：合法<br/>變異類型：其他','chg.png');}</script>
+        <script type='text/javascript'>projectYears = ['111','110','109','108','107','106','105','104','103','102','101','100','99','98','97','96','95','94','93'];citys = ['基隆市','臺北市','新北市','桃園市','新竹縣','新竹市','苗栗縣','臺中市','南投縣','彰化縣','雲林縣','嘉義縣','嘉義市','臺南市','高雄市','屏東縣','宜蘭縣','花蓮縣','臺東縣','金門縣','澎湖縣','連江縣'];endYear=110;totalYears = 18;function markImage(){var Pimg0=['https://data.csrsr.ncu.edu.tw/SP/wmts/SP2021NC_3857/','CSRSRWMTS',21.85793,119.93947,25.35050,122.07939];al.push(Pimg0);var Pimg1=['https://data.csrsr.ncu.edu.tw/SP/wmts/SP2020NC_3857/','CSRSRWMTS',21.85793,119.93947,25.35050,122.07939];al.push(Pimg1);var Pimg2=['https://data.csrsr.ncu.edu.tw/SP/wmts/SP2019NC_3857/','CSRSRWMTS',21.85793,119.93947,25.35050,122.07939];al.push(Pimg2);var Pimg3=['https://data.csrsr.ncu.edu.tw/SP/wmts/SP2018NC_3857/','CSRSRWMTS',21.85793,119.93947,25.35050,122.07939];al.push(Pimg3);var Pimg4=['https://data.csrsr.ncu.edu.tw/SP/wmts/SP2017NC_3857/','CSRSRWMTS',21.85793,119.93947,25.35050,122.07939];al.push(Pimg4);var Pimg5=['https://data.csrsr.ncu.edu.tw/SP/wmts/SP2016NC_3857/','CSRSRWMTS',21.88478,120.00676,25.31465,122.01962];al.push(Pimg5);var Pimg6=['https://data.csrsr.ncu.edu.tw/SP/wmts/SP2015NC_3857/','CSRSRWMTS',21.88478,120.00677,25.31465,122.01961];al.push(Pimg6);var Pimg7=['https://data.csrsr.ncu.edu.tw/SP/wmts/SP2014NC_3857/','CSRSRWMTS',21.88478,120.00677,25.31466,122.01962];al.push(Pimg7);var Pimg8=['https://data.csrsr.ncu.edu.tw/SP/wmts/SP2013NC_3857/','CSRSRWMTS',21.88478,120.00677,25.31466,122.01962];al.push(Pimg8);var Pimg9=['https://data.csrsr.ncu.edu.tw/SP/wmts/SP2012NC_3857/','CSRSRWMTS',21.81967,119.86494,25.43354,122.05213];al.push(Pimg9);var Pimg10=['https://data.csrsr.ncu.edu.tw/SP/wmts/SP2011NC_3857/','CSRSRWMTS',21.81968,119.86494,25.43354,122.05213];al.push(Pimg10);var Pimg11=['https://data.csrsr.ncu.edu.tw/SP/wmts/SP2010NC_3857/','CSRSRWMTS',21.81968,119.86494,25.43354,122.05213];al.push(Pimg11);var Pimg12=['https://data.csrsr.ncu.edu.tw/SP/wmts/SP2009NC_3857/','CSRSRWMTS',21.81781,119.86499,25.43349,122.05209];al.push(Pimg12);var Pimg13=['https://data.csrsr.ncu.edu.tw/SP/wmts/SP2008NC_3857/','CSRSRWMTS',21.81781,119.86499,25.43349,122.05209];al.push(Pimg13);var Pimg14=['https://data.csrsr.ncu.edu.tw/SP/wmts/SP2007NC_3857/','CSRSRWMTS',21.81781,119.86499,25.43349,122.05209];al.push(Pimg14);var Pimg15=['https://data.csrsr.ncu.edu.tw/SP/wmts/SP2006NC_3857/','CSRSRWMTS',21.81781,119.86499,25.43349,122.05209];al.push(Pimg15);var Pimg16=['https://data.csrsr.ncu.edu.tw/SP/wmts/SP2005NC_3857/','CSRSRWMTS',21.81781,119.86499,25.43349,122.05209];al.push(Pimg16);var Pimg17=['https://data.csrsr.ncu.edu.tw/SP/wmts/SP2004NC_3857/','CSRSRWMTS',21.81781,119.86499,25.43349,122.05209];al.push(Pimg17);}</script>
+
+
+
+</form>
+
+</div>
+
+<div class="container-fluid">
+<!-- Footer -->
+  <div class="row footer">
+    <!--
+  	<div class="col-xs-12 col-sm-4 col-sm-offset-2 copyright">
+      	© 2016
+    </div>-->
+    <div class="col-xs-12 counter">
+        <div class="col-xs-12 col-sm-5">
+            <img src="../../../App_Themes/RWDTheme/Image/logo_2018.png" />
+        </div>        
+        <div class="col-xs-12 col-sm-7">
+            <div>國立中央大學 太空及遙測研究中心</div>
+            <div><span>聯絡電話：03-4227151 分機 57659 或 57685、03-2807236</span> <span>地址 : 32001 桃園市中壢區五權里2鄰中大路300號</span></div>
+            <div>
+                <span>到訪人次統計</span>
+                <span>
+                    
+                    &nbsp;本日：<span id="lblCounterDaily">144</span>人
+                    &nbsp;昨日：<span id="lblCounterYesterday">167</span>人
+                    &nbsp;本週：<span id="lblCounterWeekly">537</span>人
+                    &nbsp;本月：<span id="lblCounterMonthly">1572</span>人
+                    &nbsp;累計：<span id="lblCounterTotal">214898</span>人
+                
+                </span>
+            </div>
+
+            <div>本系統建議使用 FireFox(火狐)、Google Chrome、IE11以上版本瀏覽器</div>
+        </div>        
+    </div>
+  </div>
+</div>
+
+
+
+
+<script src="../JavaScript/visuals.js"></script>
+
+</body>
+</html>
