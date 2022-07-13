@@ -85,12 +85,46 @@ foreach ($projectYears as $projectYear) {
     if (!file_exists($rawPath)) {
         mkdir($rawPath, 0777, true);
     }
+    $dataPath = $basePath . '/data/csv/' . $projectYear;
+    if (!file_exists($dataPath)) {
+        mkdir($dataPath, 0777, true);
+    }
     foreach ($cities as $city) {
         $targetFile = $rawPath . '/' . $city . '.html';
         if (!file_exists($targetFile)) {
             $crawler = $client->submit($form, ['City' => $city, 'ProjectYear' => $projectYear]);
             file_put_contents($targetFile, $client->getResponse()->getContent());
             echo "{$targetFile}\n";
+        }
+        $fh = fopen($dataPath . '/' . $city . '.csv', 'w');
+        $headerDone = false;
+
+        $content = file_get_contents($targetFile);
+
+        $pos = strpos($content, 'function markerBind');
+        if (false !== $pos) {
+            $posEnd = strpos($content, '</script>', $pos);
+            $part = substr($content, $pos, $posEnd - $pos);
+            $lines = explode(');', $part);
+            foreach ($lines as $line) {
+                $line = str_replace('\'', '', $line);
+                $parts = explode(',', $line);
+                if (count($parts) === 4) {
+                    $dataLine = [];
+                    $parts2 = explode('<br/>', $parts[2]);
+                    foreach ($parts2 as $part) {
+                        $parts3 = explode('：', $part);
+                        $dataLine[$parts3[0]] = $parts3[1];
+                    }
+                    $dataLine['latitude'] = trim(substr($parts[0], strrpos($parts[0], '(') + 1));
+                    $dataLine['longitude'] = trim($parts[1]);
+                    if (false === $headerDone) {
+                        $headerDone = true;
+                        fputcsv($fh, array_keys($dataLine));
+                    }
+                    fputcsv($fh, $dataLine);
+                }
+            }
         }
     }
 }
