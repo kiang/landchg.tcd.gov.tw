@@ -125,9 +125,9 @@ foreach ($projectYears as $projectYear) {
                         }
                         if (!isset($yearPool[$dataLine['變異類型']][$projectYear])) {
                             $yearPool[$dataLine['變異類型']][$projectYear] = [];
-                        }
-                        if (!isset($yearPool[$dataLine['變異類型']][$projectYear][$city])) {
-                            $yearPool[$dataLine['變異類型']][$projectYear][$city] = 0;
+                            foreach ($cities as $key) {
+                                $yearPool[$dataLine['變異類型']][$projectYear][$key] = 0;
+                            }
                         }
                         ++$yearPool[$dataLine['變異類型']][$projectYear][$city];
                     }
@@ -144,8 +144,6 @@ foreach ($projectYears as $projectYear) {
         }
     }
 }
-
-
 
 $sumPath = $basePath . '/data/csv/summary';
 if (!file_exists($sumPath)) {
