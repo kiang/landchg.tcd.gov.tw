@@ -82,7 +82,6 @@ $form->set($formInput);
 
 $yearPool = [];
 foreach ($projectYears as $projectYear) {
-    $yearPool[$projectYear] = [];
     $rawPath = $basePath . '/raw/' . $projectYear;
     if (!file_exists($rawPath)) {
         mkdir($rawPath, 0777, true);
@@ -92,7 +91,6 @@ foreach ($projectYears as $projectYear) {
         mkdir($dataPath, 0777, true);
     }
     foreach ($cities as $city) {
-        $yearPool[$projectYear][$city] = 0;
         $targetFile = $rawPath . '/' . $city . '.html';
         if (!file_exists($targetFile)) {
             $crawler = $client->submit($form, ['City' => $city, 'ProjectYear' => $projectYear]);
@@ -121,9 +119,17 @@ foreach ($projectYears as $projectYear) {
                     }
                     if (!isset($dataLine['變異類型'])) {
                         $dataLine['變異類型'] = '';
-                    }
-                    if ($dataLine['變異類型'] === '傾倒廢棄物、土') {
-                        $yearPool[$projectYear][$city] += 1;
+                    } else {
+                        if (!isset($yearPool[$dataLine['變異類型']])) {
+                            $yearPool[$dataLine['變異類型']] = [];
+                        }
+                        if (!isset($yearPool[$dataLine['變異類型']][$projectYear])) {
+                            $yearPool[$dataLine['變異類型']][$projectYear] = [];
+                        }
+                        if (!isset($yearPool[$dataLine['變異類型']][$projectYear][$city])) {
+                            $yearPool[$dataLine['變異類型']][$projectYear][$city] = 0;
+                        }
+                        ++$yearPool[$dataLine['變異類型']][$projectYear][$city];
                     }
 
                     $dataLine['latitude'] = trim(substr($parts[0], strrpos($parts[0], '(') + 1));
@@ -139,12 +145,20 @@ foreach ($projectYears as $projectYear) {
     }
 }
 
-$headerDone = false;
-$fh = fopen($basePath . '/data/csv/summary.csv', 'w');
-foreach ($yearPool as $y => $line) {
-    if (false === $headerDone) {
-        $headerDone = true;
-        fputcsv($fh, array_merge(['year'], array_keys($line)));
+
+
+$sumPath = $basePath . '/data/csv/summary';
+if (!file_exists($sumPath)) {
+    mkdir($sumPath, 0777, true);
+}
+foreach ($yearPool as $type => $lv1) {
+    $headerDone = false;
+    $fh = fopen($basePath . '/data/csv/' . $type . '.csv', 'w');
+    foreach ($lv1 as $y => $line) {
+        if (false === $headerDone) {
+            $headerDone = true;
+            fputcsv($fh, array_merge(['year'], array_keys($line)));
+        }
+        fputcsv($fh, array_merge([$y], $line));
     }
-    fputcsv($fh, array_merge([$y], $line));
 }
