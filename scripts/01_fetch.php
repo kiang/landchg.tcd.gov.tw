@@ -153,7 +153,7 @@ if (!file_exists($sumPath)) {
 }
 foreach ($yearPool as $type => $lv1) {
     $headerDone = false;
-    $fh = fopen($basePath . '/data/csv/' . $type . '.csv', 'w');
+    $fh = fopen($sumPath . '/' . $type . '.csv', 'w');
     foreach ($lv1 as $y => $line) {
         if (false === $headerDone) {
             $headerDone = true;
