@@ -85,7 +85,7 @@ foreach ($projectYears as $projectYear) {
     if (!file_exists($rawPath)) {
         mkdir($rawPath, 0777, true);
     }
-    $dataPath = $basePath . '/data/csv/' . $projectYear;
+    $dataPath = $basePath . '/docs/csv/' . $projectYear;
     if (!file_exists($dataPath)) {
         mkdir($dataPath, 0777, true);
     }
