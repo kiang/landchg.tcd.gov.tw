@@ -93,8 +93,24 @@ foreach ($projectYears as $projectYear) {
         $targetFile = $rawPath . '/' . $city . '.html';
         $crawler = $client->submit($form, ['City' => $city, 'ProjectYear' => $projectYear]);
         file_put_contents($targetFile, $client->getResponse()->getContent());
-        $fh = fopen($dataPath . '/' . $city . '.csv', 'w');
-        $headerDone = false;
+        $csvFile = $dataPath . '/' . $city . '.csv';
+        
+        // Load existing CSV data
+        $existingData = [];
+        if (file_exists($csvFile)) {
+            $fh = fopen($csvFile, 'r');
+            $headers = fgetcsv($fh);
+            while (($row = fgetcsv($fh)) !== false) {
+                if (count($row) === count($headers)) {
+                    $record = array_combine($headers, $row);
+                    $existingData[$record['變異點編號']] = $record;
+                }
+            }
+            fclose($fh);
+        }
+        
+        $newData = [];
+        $currentTime = date('Y-m-d H:i:s');
 
         $content = file_get_contents($targetFile);
 
@@ -119,13 +135,39 @@ foreach ($projectYears as $projectYear) {
 
                     $dataLine['latitude'] = trim(substr($parts[0], strrpos($parts[0], '(') + 1));
                     $dataLine['longitude'] = trim($parts[1]);
-                    if (false === $headerDone) {
-                        $headerDone = true;
-                        fputcsv($fh, array_keys($dataLine));
+                    
+                    $pointId = $dataLine['變異點編號'];
+                    if (isset($existingData[$pointId])) {
+                        // Existing record - keep created time and add modified time
+                        if (isset($existingData[$pointId]['created'])) {
+                            $dataLine['created'] = $existingData[$pointId]['created'];
+                        } else {
+                            $dataLine['created'] = $currentTime;
+                        }
+                        $dataLine['modified'] = $currentTime;
+                    } else {
+                        // New record - add created time
+                        $dataLine['created'] = $currentTime;
+                        $dataLine['modified'] = '';
                     }
-                    fputcsv($fh, $dataLine);
+                    
+                    $newData[$pointId] = $dataLine;
                 }
             }
         }
+        
+        // Sort by 變異點編號 ASC
+        ksort($newData);
+        
+        // Write to CSV file
+        $fh = fopen($csvFile, 'w');
+        if (!empty($newData)) {
+            $firstRecord = reset($newData);
+            fputcsv($fh, array_keys($firstRecord));
+            foreach ($newData as $record) {
+                fputcsv($fh, $record);
+            }
+        }
+        fclose($fh);
     }
 }
