@@ -110,7 +110,8 @@ foreach ($projectYears as $projectYear) {
         }
         
         $newData = [];
-        $currentTime = date('Y-m-d H:i:s');
+        $timezone = new DateTimeZone('Asia/Taipei');
+        $currentTime = (new DateTime('now', $timezone))->format('Y-m-d H:i:s');
 
         $content = file_get_contents($targetFile);
 
