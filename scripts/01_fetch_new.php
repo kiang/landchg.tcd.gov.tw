@@ -139,13 +139,32 @@ foreach ($projectYears as $projectYear) {
                     
                     $pointId = $dataLine['變異點編號'];
                     if (isset($existingData[$pointId])) {
-                        // Existing record - keep created time and add modified time
+                        // Existing record - keep created time and check for changes in first 6 fields
                         if (isset($existingData[$pointId]['created'])) {
                             $dataLine['created'] = $existingData[$pointId]['created'];
                         } else {
                             $dataLine['created'] = $currentTime;
                         }
-                        $dataLine['modified'] = $currentTime;
+                        
+                        // Compare first 6 fields: 變異點編號, 權責單位, 查證結果, 變異類型, latitude, longitude
+                        $fieldsToCompare = ['變異點編號', '權責單位', '查證結果', '變異類型', 'latitude', 'longitude'];
+                        $hasChanges = false;
+                        
+                        foreach ($fieldsToCompare as $field) {
+                            $newValue = isset($dataLine[$field]) ? $dataLine[$field] : '';
+                            $oldValue = isset($existingData[$pointId][$field]) ? $existingData[$pointId][$field] : '';
+                            if ($newValue !== $oldValue) {
+                                $hasChanges = true;
+                                break;
+                            }
+                        }
+                        
+                        if ($hasChanges) {
+                            $dataLine['modified'] = $currentTime;
+                        } else {
+                            // No changes - keep existing modified timestamp
+                            $dataLine['modified'] = isset($existingData[$pointId]['modified']) ? $existingData[$pointId]['modified'] : '';
+                        }
                     } else {
                         // New record - add created time
                         $dataLine['created'] = $currentTime;
